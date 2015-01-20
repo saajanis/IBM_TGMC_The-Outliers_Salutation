@@ -1,0 +1,102 @@
+-- This CLP file was created using DB2LOOK Version "9.7" 
+-- Timestamp: 4/2/2012 10:14:07 PM
+-- Database Name: SAMPLE         
+-- Database Manager Version: DB2/NT Version 9.7.5          
+-- Database Codepage: 1208
+-- Database Collating Sequence is: IDENTITY
+
+
+CONNECT TO SAMPLE;
+
+-- Mimic tablespace
+
+ALTER TABLESPACE SYSCATSPACE
+      PREFETCHSIZE AUTOMATIC
+      OVERHEAD 7.500000
+      NO FILE SYSTEM CACHING 
+      AUTORESIZE YES 
+      TRANSFERRATE 0.060000;
+
+
+ALTER TABLESPACE TEMPSPACE1
+      PREFETCHSIZE AUTOMATIC
+      OVERHEAD 7.500000
+      FILE SYSTEM CACHING 
+      TRANSFERRATE 0.060000;
+
+
+ALTER TABLESPACE USERSPACE1
+      PREFETCHSIZE AUTOMATIC
+      OVERHEAD 7.500000
+      NO FILE SYSTEM CACHING 
+      AUTORESIZE YES 
+      TRANSFERRATE 0.060000;
+
+
+------------------------------------------------
+-- DDL Statements for table "DELL    "."USERS"
+------------------------------------------------
+ 
+
+CREATE TABLE "DELL    "."USERS"  (
+		  "ID" BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (  
+		    START WITH +0  
+		    INCREMENT BY +1  
+		    MINVALUE +0  
+		    MAXVALUE +9223372036854775807  
+		    NO CYCLE  
+		    NO CACHE  
+		    NO ORDER ) , 
+		  "USER_LOGIN" VARCHAR(60) NOT NULL , 
+		  "USER_PASSWORD" VARCHAR(60) NOT NULL , 
+		  "USER_EMAIL" VARCHAR(100) NOT NULL , 
+		  "USER_FIRST_NAME" VARCHAR(100) NOT NULL , 
+		  "USER_LAST_NAME" VARCHAR(100) NOT NULL , 
+		  "USER_PROFILE_PIC" VARCHAR(300) NOT NULL WITH DEFAULT 'profile.jpg' , 
+		  "USER_TYPE" VARCHAR(20) NOT NULL , 
+		  "USER_SECURITY_QUESTION" VARCHAR(100) NOT NULL , 
+		  "USER_SECURITY_ANSWER" VARCHAR(100) NOT NULL , 
+		  "USER_ISACTIVE" INTEGER NOT NULL WITH DEFAULT 0 , 
+		  "USER_PROFILE_THUMB" VARCHAR(300) NOT NULL WITH DEFAULT 'def-thumb.jpg' , 
+		  "USER_JOIN_DATE" VARCHAR(100) , 
+		  "USER_SCORE" BIGINT NOT NULL WITH DEFAULT 0 , 
+		  "USER_STATE" VARCHAR(50) , 
+		  "USER_ADDRESS" VARCHAR(300) , 
+		  "USER_ABOUT_ME" VARCHAR(1024) , 
+		  "USER_VERIFY_DOC" VARCHAR(300) , 
+		  "USER_ISVERIFIED" SMALLINT NOT NULL WITH DEFAULT 0 , 
+		  "USER_ISBLOCKED" SMALLINT NOT NULL WITH DEFAULT 0 , 
+		  "USER_AGE" SMALLINT , 
+		  "USER_GENDER" VARCHAR(6) , 
+		  "USER_UID" VARCHAR(4) , 
+		  "USER_CONTACT_NO" VARCHAR(20) , 
+		  "USER_JOB_DESC" VARCHAR(100) )   
+		 IN "USERSPACE1" ; 
+
+
+-- DDL Statements for primary key on Table "DELL    "."USERS"
+
+ALTER TABLE "DELL    "."USERS" 
+	ADD CONSTRAINT "CC1333227139997" PRIMARY KEY
+		("USER_LOGIN");
+
+
+
+ALTER TABLE "DELL    "."USERS" ALTER COLUMN "ID" RESTART WITH 6;
+
+
+
+
+
+
+
+COMMIT WORK;
+
+CONNECT RESET;
+
+TERMINATE;
+
+-- Generate statistics for all creators 
+-- The db2look utility will consider only the specified tables 
+-- Creating DDL for table(s)
+;
